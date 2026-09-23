@@ -117,7 +117,7 @@
 
      Milestone 5. -->
 
-**1.** I asked Claude to write my acceptance criteria for me. It gave me all five, but I didn't love its fifth one. It was about checking if the right file got cited, which felt hard to actually measure, so I wrote my own about whether the answer contains the phrase I expected. Claude also caught that some of my expected phrases wouldn't match the documents. I had "4min walk" but the post says "4 minutes", so I fixed those.
+**1.** I asked Claude for help with to check my expected wasn't hard to match the documents. I had "4min walk" but the post says "4 minutes", so I fixed that
 
 **2.** For the chunking part, Claude started writing the code for me. I stopped it and had it undo the change, because I wanted to figure out the chunking decision myself. I had it walk me through the steps instead.
 
