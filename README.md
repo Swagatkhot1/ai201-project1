@@ -20,6 +20,7 @@
 # Unit 1
 
 ## What This Does
+"I built a system that answers questions about campus life. It uses the campus_life corpus: 88 short posts from students about classes, dorms, campus jobs, orientation and admin stuff like study abroad and parking. You ask it something like "how much work is Econ 101 outside of class?" and it finds the posts that talk about that, then writes an answer and tells you which post it got it from. If you ask something that has nothing to do with campus, like who won the World Cup, it just says it doesn't know instead of making something up."
 
 <!-- Three or four sentences. Which corpus you picked, and the kinds of
      questions your system answers. Write it for someone who has never seen
@@ -116,9 +117,9 @@
 
      Milestone 5. -->
 
-**1.**
+**1.** I asked Claude to write my acceptance criteria for me. It gave me all five, but I didn't love its fifth one. It was about checking if the right file got cited, which felt hard to actually measure, so I wrote my own about whether the answer contains the phrase I expected. Claude also caught that some of my expected phrases wouldn't match the documents. I had "4min walk" but the post says "4 minutes", so I fixed those.
 
-**2.**
+**2.** For the chunking part, Claude started writing the code for me. I stopped it and had it undo the change, because I wanted to figure out the chunking decision myself. I had it walk me through the steps instead.
 
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
