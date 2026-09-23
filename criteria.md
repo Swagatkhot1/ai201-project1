@@ -29,11 +29,11 @@ I'm not aiming for 5 of 5 because of my Aldridge Hall question. There are three 
 
 ## 2. Every answer names a source
 
-Almost Every answer the system produces names at least one source document.
+Every answer the system produces names at least one source document.
 
 **Why this target:**
+Every chunk is labeled with its file name, so all 5 answers should name one
 
-Every chunk the model sees is already labeled with its file name, so naming a source only depends on the model following the prompt. It doesn't depend on retrieval being good. Some of my documents cover overlapping topics, like three Aldridge Hall files and three Econ 101 files, so the model might name the wrong one
 ---
 
 ## 3. The relevance gate stops out-of-corpus questions
@@ -46,6 +46,7 @@ in at least 4 of 5 tries.
 
 **Why this target:**
 My out-of-scope questions have nothing to do with campus life, so they should come back far from every chunk and get refused. 
+
 ---
 
 ## 4. Something about your chunks
