@@ -23,19 +23,17 @@ For at least 4 of my 5 test questions, the retrieved chunks include one that
 contains the answer.
 
 **Why this target:**
-<!-- e.g. "One of my questions is about a topic only two documents mention, so
-     I expect that one to be hard." -->
+I'm not aiming for 5 of 5 because of my Aldridge Hall question. There are three documents with  in the title ,but the walking time is  in transit_walking.txt. Those dorm documents could push the right chunk out of the top 5. The other four questions each have one clear document on the topic, so missing more than one would mean retrieval itself is broken
 
 ---
 
 ## 2. Every answer names a source
 
-Every answer the system produces names at least one source document.
+Almost Every answer the system produces names at least one source document.
 
 **Why this target:**
-<!-- Why all five and not four? What about your setup makes that achievable —
-     or what would have to go wrong for it not to be? -->
 
+Every chunk the model sees is already labeled with its file name, so naming a source only depends on the model following the prompt. It doesn't depend on retrieval being good. Some of my documents cover overlapping topics, like three Aldridge Hall files and three Econ 101 files, so the model might name the wrong one
 ---
 
 ## 3. The relevance gate stops out-of-corpus questions
@@ -44,54 +42,35 @@ When I ask a question my documents clearly don't cover, the relevance gate
 stops it and the system returns "I don't have enough information about that" —
 in at least 4 of 5 tries.
 
-<!-- The five questions are the ones in `OUT_OF_SCOPE` at the bottom of
-     `questions.py`, and `run_eval.py` puts them through the gate and writes
-     what happened into your run log. Swap them for your own if you'd rather —
-     just keep five of them, or the "4 of 5" above has nothing to be 4 of. -->
+
 
 **Why this target:**
-<!-- What did your distances look like when you set the cutoff in Milestone 4?
-     Was there a clean gap, or did the two groups overlap? -->
-
+My out-of-scope questions have nothing to do with campus life, so they should come back far from every chunk and get refused. 
 ---
 
 ## 4. Something about your chunks
 
-<!-- YOU WRITE THIS ONE.
+For at least 4 of my 5 test questions, the chunk that contains the answer also contains the thing the question is asking about, in the same chunk. 
 
-     How would you know if your chunks were the right size? Name something
-     countable or observable.
-
-     Examples of the right shape — don't copy these, they should come from
-     what you actually saw in Milestone 3:
-       - "At least 4 of 5 sampled chunks read as a complete thought, with no
-          sentence cut in half at either end."
-       - "No chunk is shorter than 200 characters, since anything below that
-          in my corpus turned out to be a heading with no content under it." -->
+For example, "Aldridge Hall" and "4 minutes" appear together, not split across two chunks.
 
 
 
 **Why this target:**
 
-
+My chunks are 800 characters with 120 characters of overlap. Short documents like transit_walking.txt fit in one chunk, so their answers can't be split, but a longer document could get cut between a topic and its answer. 
 
 ---
 
 ## 5. Your choice
 
-<!-- YOU WRITE THIS ONE TOO.
-
-     Pick something you actually care about getting right. It could be about
-     speed, about refusals, about a particular kind of question your corpus
-     handles badly, about source attribution being correct rather than merely
-     present — anything, as long as it names a number or an observable
-     outcome. -->
-
+For at least 4 of my 5 test questions, the system's answer contains the expects phrase I wrote in questions.py.
+    
 
 
 **Why this target:**
 
-
+Retrieving the right chunk doesn't guarantee the model uses it correctly. It could round a number, mix up two facts, or answer too vaguely
 
 ---
 
