@@ -1,6 +1,6 @@
 # The Unofficial Guide
 
-<!-- Replace this line with your name and which corpus you picked. -->
+Swagat Khot — corpus: campus_life
 
 > **This file is your submission.** Fill it in as you go — most sections get
 > written during the milestone that produces them, not at the end.
@@ -30,8 +30,10 @@
 
 ## Chunking Strategy
 
-**Chunk size:**
-**Overlap:**
+**Chunk size:** one whole post per chunk (the longest post is 554 characters)
+**Overlap:** 0
+
+When I ran the starter chunker, it made 88 chunks from 88 posts, so it never split anything. My posts are short (183 to 554 characters), and when I read them, each one covers a single topic: one course, one dorm, one deadline. Splitting them would separate facts from what they're about. For example, "4 minutes" could end up in a different chunk from "Aldridge Hall." So I rewrote `split_documents` to keep each post as one chunk. I first set CHUNK_SIZE to 600 in config.py to fit the longest post, then decided to keep posts whole directly in the code, so overlap doesn't matter because nothing is split.
 
 <!-- What about YOUR documents made you pick these numbers? Short posts and
      long sectioned guides don't want the same chunking, and "800 seemed
@@ -43,40 +45,61 @@
 
      Milestone 3. -->
 
+
 ## Sample Chunks
 
-<!-- Five chunks, pasted as text. Label each one and name the file it came from
-     AND the function that produced it — the grader checks your code against
-     what you claim here.
-
-     `python app.py chunks -n 5` prints all three for you. Copy them straight
-     across.
-
-     Milestone 3. -->
-
-**Chunk 1** — source: `` — produced by: ``
+**Chunk 1** — source: `admin_add_drop_deadline.txt#0` — produced by: `chunker.py::split_documents`
 
 ```
+On the add/drop deadline
+
+You can add a course through the end of the second week. Dropping is a longer window — through the end of week six — but a drop after week two shows as a W on your transcript. Nothing anywhere on the registrar's site says this plainly, and students find out from each other.
 ```
 
-**Chunk 2** — source: `` — produced by: ``
+**Chunk 2** — source: `course_biol_160.txt#0` — produced by: `chunker.py::split_documents`
 
 ```
+BIOL 160 Cell Biology
+
+I lived here my sophomore year. Format is lecture three times a week with a weekly lab. Assessment: four unit tests and a cumulative final. Not curved.
+
+Expect 9 to 11 hours a week, the heaviest first-year course by reputation.
+
+The one piece of advice: the unit tests come fast, roughly every three weeks; falling behind once is very hard to recover from.
 ```
 
-**Chunk 3** — source: `` — produced by: ``
+**Chunk 3** — source: `course_hist_118_workload.txt#0` — produced by: `chunker.py::split_documents`
 
 ```
+Workload for HIST 118 Modern World History
+
+People keep asking so: a lot of reading, about 120 pages a week, but no problem sets. That's real time, not optimistic time.
+
+It's front-loaded — the first month is heavier than the rest, partly because you're learning the format.
 ```
 
-**Chunk 4** — source: `` — produced by: ``
+**Chunk 4** — source: `dining_pellew_dining_hall_followup.txt#0` — produced by: `chunker.py::split_documents`
 
 ```
+Re: Pellew Dining Hall
+
+Adding to what people have said about Pellew Dining Hall. The wait figure of 12 to 18 minutes at peak matches what I've seen. If you're trying to eat between classes, go before 11:45 and it's a different building entirely.
+
+Also worth saying: the furthest hall from anywhere, next to the athletics centre. Nobody tells you this at orientation.
 ```
 
-**Chunk 5** — source: `` — produced by: ``
+**Chunk 5** — source: `housing_innisfree_hall.txt#0` — produced by: `chunker.py::split_documents`
 
 ```
+Innisfree Hall — what it's actually like
+
+Transferred in last year, so take this with a grain of salt. Built 1991, renovated 2022. Rooms are doubles arranged as pairs sharing one bathroom between two rooms.
+
+The good: the shared-bathroom-between-two-rooms arrangement is the best compromise on campus.
+
+The bad: no air conditioning, which matters for the first three weeks of September.
+
+Laundry costs $1.75 wash, $1.75 dry, app-based. On noise: moderate; the building is L-shaped and the short wing is much quieter.
 ```
 
 ## Sample Answer
@@ -84,14 +107,16 @@
 <!-- One complete question and answer, pasted as text, with the source line
      visible. Milestone 4. -->
 
-**Question:**
+**Question:**when does application open for study abroad
 
-**Answer:**
+**Answer:**Applications for study abroad open in October for the following academic year (admin_study_abroad.txt).
 
 ```
 ```
 
-**My relevance cutoff:**
+**My relevance cutoff:** 0.6
+
+My five real questions had best distances between 0.25 and 0.44. My five off-topic questions were between 0.82 and 0.93. So there's a wide gap from 0.44 to 0.82 with no overlap, and 0.6 sits in it with room on both sides.
 
 <!-- The number you set in config.py, and how you got there.
 
@@ -104,7 +129,16 @@
 
 | Question | In corpus? | Best distance |
 |---|---|---|
-|  |  |  |
+| when does application open for study abroad | Yes | 0.2474 |
+| how much econ 101 work outside of class | Yes | 0.3951 |
+| whats the maximum hours a week i can work on campus | Yes | 0.3618 |
+| how much actually matters in orientation week | Yes | 0.3629 |
+| how much time from Aldridge Hall to the science quad | Yes | 0.4353 |
+| What is the capital of Mongolia? | No | 0.8246 |
+| How do I change the oil in a diesel engine? | No | 0.9340 |
+| Who won the 1994 World Cup? | No | 0.8859 |
+| What is the recommended dosage of ibuprofen for a headache? | No | 0.8442 |
+| How do I write a for loop in Rust? | No | 0.8960 |
 
 ## How I Used AI
 
@@ -117,9 +151,9 @@
 
      Milestone 5. -->
 
-**1.** I asked Claude for help with to check my expected wasn't hard to match the documents. I had "4min walk" but the post says "4 minutes", so I fixed that
+**1.** I asked Claude to look at how long my documents were so I could pick a chunk size. It found that my posts range from 183 to 554 characters, about 320 on average. I first tried 560 to fit the longest post, but Claude pointed out that with 120 overlap, the chunker would still create small duplicate chunks from the ends of my longer posts. So I set the size to 600 to leave some room, and changed the overlap to 0, since each post is one chunk and nothing gets split.
 
-**2.** For the chunking part, Claude started writing the code for me. I stopped it and had it undo the change, because I wanted to figure out the chunking decision myself. I had it walk me through the steps instead.
+**2.** I asked Claude to write the function that splits my documents. It first gave me a complicated version that split long posts by paragraph, which I undid because I didn't need it. Then I asked for a simple version that keeps each post as one chunk. I checked that it set `produced_by` to `chunker.py::split_documents` so my README's Sample Chunks would match the code, and I confirmed it still produced 88 chunks..
 
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never

@@ -51,15 +51,12 @@ My out-of-scope questions have nothing to do with campus life, so they should co
 
 ## 4. Something about your chunks
 
-For at least 4 of my 5 test questions, the chunk that contains the answer also contains the thing the question is asking about, in the same chunk. 
-
-For example, "Aldridge Hall" and "4 minutes" appear together, not split across two chunks.
-
+For at least 4 of my 5 test questions, the chunk that contains the answer also names what the answer is about.
 
 
 **Why this target:**
 
-My chunks are 800 characters with 120 characters of overlap. Short documents like transit_walking.txt fit in one chunk, so their answers can't be split, but a longer document could get cut between a topic and its answer. 
+My posts are short (183–554 characters) and each post is one chunk, so most answers can't be split away from their topic. But transit_walking.txt lists several routes in a row, and my retrieval showed dorm posts outranking it for the Aldridge question. If a chunk ever held "4 minutes" without "Aldridge Hall," the model couldn't tell which walk it was.
 
 ---
 
