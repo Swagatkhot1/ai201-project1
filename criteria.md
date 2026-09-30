@@ -107,3 +107,6 @@ Retrieving the right chunk doesn't guarantee the model uses it correctly. It cou
      The whole reason the originals stay visible is so someone can see what you
      said before you knew the answer.
      ───────────────────────────────────────────────────────────────────────── -->
+> **Revised in unit 2:** For at least 4 of my 5 test questions, the system's answer states the same fact as my expects phrase, counting numbers written as words (e.g. "four minutes" = "4 minutes") as a match.
+>
+> **Why revised:** In run 2, the Aldridge answer said "four minutes" and my scorer marked it as a fail even though it was correct. The original criterion measured whether the model used my exact wording, not whether it got the fact right.

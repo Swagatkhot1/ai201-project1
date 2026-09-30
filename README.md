@@ -246,11 +246,11 @@ It takes four minutes to get from Aldridge Hall to the science quad (from **hous
 
 | # | Criterion | Verdict | How I decided |
 |---|---|---|---|
-| 1 |  |  |  |
-| 2 |  |  |  |
-| 3 |  |  |  |
-| 4 |  |  |  |
-| 5 |  |  |  |
+| 1 | Retrieved chunk contains the answer | MET | All 5 questions retrieved a file containing the answer in all 3 runs (5/5 each time, target 4 of 5). For Aldridge, transit_walking.txt ranked 5th, but housing_aldridge_hall.txt also says "four minutes", so the answer was in the top result too. |
+| 2 | Every answer names a source | MET | All 15 answers named at least one .txt file (5/5 in every run, target 5 of 5). |
+| 3 | Gate stops out-of-corpus questions | MET | All 5 off-topic questions were refused (5/5). The closest was 0.825, well above my 0.6 cutoff. |
+| 4 | Answer chunk also names what it's about | MET | 5/5 in every run. Each post is one chunk, so the answer and its topic were always together, e.g. "Aldridge Hall to the science quad: 4 minutes" is in one chunk. |
+| 5 | Answer contains the expects phrase | MET (close) | Runs were 5/5, 4/5, 5/5, so every run reached 4 of 5. The one fail was Aldridge in run 2: the answer said "four minutes" instead of "4 minutes". The answer was correct, but my scorer only matches the exact phrase. |
 
 ## Diagnoses
 
