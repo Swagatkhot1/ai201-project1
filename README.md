@@ -182,15 +182,56 @@ My five real questions had best distances between 0.25 and 0.44. My five off-top
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 1. Retrieved chunk contains the answer | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 2. Every answer names a source | 5 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 3. Gate stops out-of-corpus questions | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 4. Answer chunk also names what it's about | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 5. Answer contains the expects phrase | 4 of 5 | 5/5 | 4/5 | 5/5 | MET |
 
 <!-- Underneath, paste the REAL output for each criterion from one of your
      runs — the actual text your system produced, not a description of it.
      Name the file and function that produced it. -->
+
+Full log: `results/run_2026-09-29_2015_before.md`, produced by `run_eval.py::main`. Chunks from `chunker.py::split_documents`, retrieval by `store.py::search`, answers by `generate.py::answer_from_chunks`, pass/fail by `scorer.py::judge`.
+
+**Criterion 1: retrieved chunk contains the answer (Aldridge question, run 1).** The file with the answer, `transit_walking.txt`, was retrieved, but ranked below the dorm post:
+
+```
+- Best distance: 0.4353 (passed the gate)
+- Sources retrieved: dining_pellew_dining_hall.txt, dining_pellew_dining_hall_followup.txt, housing_aldridge_hall.txt, housing_aldridge_hall_noise.txt, transit_walking.txt
+```
+
+**Criterion 2: every answer names a source (work hours question, run 2).**
+
+```
+The maximum is 20 hours a week during the term. 
+
+Source: money_jobs.txt
+```
+
+**Criterion 3: gate stops out-of-corpus questions** (`run_eval.py::check_out_of_scope`, cutoff 0.6, refused 5 of 5):
+
+```
+| What is the capital of Mongolia? | 0.825 | refused |
+| How do I change the oil in a diesel engine? | 0.934 | refused |
+| Who won the 1994 World Cup? | 0.886 | refused |
+| What is the recommended dosage of ibuprofen for a headache? | 0.844 | refused |
+| How do I write a for loop in Rust? | 0.896 | refused |
+```
+
+**Criterion 4: answer chunk also names what it's about (Aldridge question).** The answer came from a whole-post chunk where the place and the time are in the same line:
+
+```
+It takes 4 minutes to get from Aldridge Hall to the science quad. 
+
+Source documents: `housing_aldridge_hall.txt` and `transit_walking.txt`
+```
+
+**Criterion 5: answer contains the expects phrase (Aldridge question, run 2, the one fail).** Expected "4 minutes"; the answer spelled it out:
+
+```
+It takes four minutes to get from Aldridge Hall to the science quad (from **housing_aldridge_hall.txt** and **transit_walking.txt**).
+```
 
 ## Verdicts
 
