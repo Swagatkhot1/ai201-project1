@@ -271,6 +271,15 @@ It takes four minutes to get from Aldridge Hall to the science quad (from **hous
      low, and which one you'd tighten and to what.
 
      Milestone 3. -->
+I missed nothing: all five criteria were met in all three runs. That probably means my targets were safe, not that my system is excellent.
+
+**The one close call (criterion 5, Aldridge question, run 2).** Stage: generation, then measurement. Two retrieved posts state the same fact in different forms. transit_walking.txt says "4 minutes" and housing_aldridge_hall.txt says "four minutes to a 9am lab". In run 2 the model used the dorm post's wording, and scorer.py::judge only checks for the exact text "4 minutes", so a correct answer was marked as a fail. The problem is my measurement: my expects phrase only matched one of the two posts that contain the answer.
+
+**Pattern.** My targets were set low. Every question has one short post that answers it directly, and because each post is one chunk, criterion 4 could not fail at all. My off-topic questions were also too easy: the closest one was 0.825, far above my 0.6 cutoff.
+
+**What I'd tighten:**
+- Criterion 1, to "for 5 of 5 questions, the top-ranked chunk contains the answer." This would fail: for Econ 101, the #1 result was course_econ_101_exams.txt, which doesn't mention "4 hours". The posts that do came #2 and #3.
+- Criterion 3, to use near-miss campus questions my posts don't answer (like "what time does the gym open?") instead of questions from completely different subjects. Those would land much closer to my 0.6 cutoff and actually test the gate.
 
 ## The Improvement
 
